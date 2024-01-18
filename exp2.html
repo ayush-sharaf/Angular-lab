@@ -8,15 +8,54 @@
     <script>
         var app=angular.module("myApp",[]);
         app.controller("myCtrl",function($scope){
+            $scope.shoppingList=["apple","mango","banana","kiwi"];
+            $scope.addItem=function(){
+                if($scope.newItem && $scope.shoppingList.indexOf($scope.newItem)==-1){
+                    $scope.shoppingList.push($scope.newItem)
+                    $scope.newItem=""
+                }
+                else{
+                    if($scope.newItem){
+                        alert("already there in the list")
+                    }
+                    else{
+                        alert("plaese enter an item")
+                    }
+                }
+            }
+            $scope.removeItem=function(){
+                if($scope.shoppingList.indexOf($scope.selectItem)==-1){
+                    alert("please select an item to remove")
+                }
+                else{
+                    var index=$scope.shoppingList.indexOf($scope.selectItem);
+                    $scope.shoppingList.splice(index,1)
+                    $scope.selectItem=""
+                }
+            }
             
         });
     </script>
 </head>
 
 <body ng-app="myApp">
-    <h1>Angular  program</h1>
+    <h1>Angular  Shopping list program</h1>
     <div ng-controller="myCtrl">
-        
+        <table border="1">
+           <tr>
+            <th>Sl No.</th>
+            <th>Name</th>
+           </tr>
+           <tr ng-repeat="item in shoppingList">
+            <td>{{$index+1}}</td>
+            <td>{{item}}</td>
+           </tr>
+           
+        </table>
+        <input type="text" ng-model="newItem">
+        <button ng-click="addItem()">Add item</button>
+        <select ng-model="selectItem" ng-options="item for item in shoppingList"></select>
+        <button ng-click="removeItem()">remove item</button>
     </div>
     
 </body>
