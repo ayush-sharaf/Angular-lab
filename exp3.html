@@ -27,7 +27,7 @@
               if ($scope.num2 == 0) {
                 alert("divide by zero error");
               } else {
-                $scope.result = $scope.num1 / $scope.num2;
+                $scope.result = ($scope.num1 / $scope.num2).toFixed(3);
               }
               break;
           }
@@ -38,14 +38,14 @@
   <body ng-app="myApp">
     <h1>Angular Simple Calculator</h1>
     <div ng-controller="myCtrl">
-      <input type="text" ng-model="num1" />
+      <input type="number" ng-model="num1" />
       <select ng-model="operator">
         <option value="add">+</option>
         <option value="sub">-</option>
         <option value="mul">*</option>
         <option value="div">/</option>
       </select>
-      <input type="text" ng-model="num2" />
+      <input type="number" ng-model="num2" />
       <button ng-click="compute()">Compute</button>
       <h2>{{num1+" "+operator+" "+num2+" = "+result}}</h2>
     </div>
