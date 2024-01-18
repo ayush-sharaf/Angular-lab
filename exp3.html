@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("myCtrl", function ($scope) {
+        $scope.num1 = 0;
+        $scope.num2 = 0;
+        $scope.result = 0;
+        $scope.operator = "add";
+        $scope.compute = function () {
+          switch ($scope.operator) {
+            case "add":
+              $scope.result = $scope.num1 + $scope.num2;
+              break;
+            case "sub":
+              $scope.result = $scope.num1 - $scope.num2;
+              break;
+            case "mul":
+              $scope.result = $scope.num1 * $scope.num2;
+              break;
+            case "div":
+              if ($scope.num2 == 0) {
+                alert("divide by zero error");
+              } else {
+                $scope.result = $scope.num1 / $scope.num2;
+              }
+              break;
+          }
+        };
+      });
+    </script>
+  </head>
+  <body ng-app="myApp">
+    <h1>Angular Simple Calculator</h1>
+    <div ng-controller="myCtrl">
+      <input type="text" ng-model="num1" />
+      <select ng-model="operator">
+        <option value="add">+</option>
+        <option value="sub">-</option>
+        <option value="mul">*</option>
+        <option value="div">/</option>
+      </select>
+      <input type="text" ng-model="num2" />
+      <button ng-click="compute()">Compute</button>
+      <h2>{{num1+" "+operator+" "+num2+" = "+result}}</h2>
+    </div>
+  </body>
+</html>
